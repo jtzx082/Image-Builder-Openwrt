@@ -1,4 +1,4 @@
-name: ImmortalWrt Image Builder (v24.10.2)
+name: OpenWrt Image Builder (v24.10.2)
 on:
   push:
     branches: [ "master" ]
