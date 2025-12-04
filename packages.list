@@ -10,7 +10,7 @@ kmod-button-hotplug
 kmod-nft-offload
 libc
 libgcc
-libustream-mbedtls
+-libustream-mbedtls
 logd
 mkf2fs
 mtd
