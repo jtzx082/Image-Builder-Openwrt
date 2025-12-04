@@ -1,4 +1,4 @@
-name: OpenWrt Image Builder (v24.10.2)
+name: OpenWrt Image Builder (v24.10.4)
 on:
   push:
     branches: [ "master" ]
@@ -10,7 +10,7 @@ env:
   PACKAGES_LIST_FILE: packages.list
   PACKAGES_FOLDER: packages
   ROOTFS_PARTSIZE: 1024   # Reconfigure the rootfs partition size (for x86 build only), variable set in MB
-  DOWNLOAD_URL: https://mirror-03.infra.openwrt.org/releases/24.10.2/targets/x86/64/openwrt-imagebuilder-24.10.2-x86-64.Linux-x86_64.tar.zst
+  DOWNLOAD_URL: https://mirror-03.infra.openwrt.org/releases/24.10.4/targets/x86/64/openwrt-imagebuilder-24.10.4-x86-64.Linux-x86_64.tar.zst
   TZ: Asia/Shanghai
 
 jobs:
