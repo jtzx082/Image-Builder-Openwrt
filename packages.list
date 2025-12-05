@@ -85,3 +85,5 @@ bind-dig
 ip-full
 luci-compat
 luci-lib-ipkg
+sing-box
+ucode-mod-digest
