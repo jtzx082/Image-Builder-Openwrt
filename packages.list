@@ -84,3 +84,4 @@ iptables-mod-socket
 bind-dig  
 ip-full
 luci-compat
+luci-lib-ipkg
