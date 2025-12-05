@@ -83,3 +83,4 @@ iptables-mod-tproxy
 iptables-mod-socket  
 bind-dig  
 ip-full
+luci-compat
