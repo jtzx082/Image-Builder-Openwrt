@@ -87,13 +87,3 @@ luci-compat
 luci-lib-ipkg
 sing-box
 ucode-mod-digest
-libgmp10
-libnettle8
-libnfnetlink0
-kmod-nf-conntrack-netlink
-libnetfilter-conntrack3
-dnsmasq-full
-libstdcpp6
-boost
-boost-program
-boost-system
