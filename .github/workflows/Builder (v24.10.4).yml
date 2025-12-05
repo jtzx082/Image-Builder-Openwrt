@@ -84,14 +84,14 @@ jobs:
       uses: softprops/action-gh-release@v2
       with:
         tag_name: "auto-release-${{ env.FILE_DATE }}"
-        name: "ImmortalWrt-${{ env.PROFILE }}-${{ env.FILE_DATE }}"
+        name: "OpenWrt-${{ env.PROFILE }}-${{ env.FILE_DATE }}"
         body: |
           自动发布固件，PROFILE=${{ env.PROFILE }}，构建时间=${{ env.FILE_DATE }}
         files: /tmp/bin_firmware/*
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: 删除 workflow runs
+    - name: Delete workflow runs
       uses: Mattraks/delete-workflow-runs@main
       with:
         retain_days: 0
