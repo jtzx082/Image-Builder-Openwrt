@@ -77,7 +77,7 @@ jobs:
     - name: Upload firmware
       uses: actions/upload-artifact@v4
       with:
-        name: ImmortalWrt-firmware-${{ env.PROFILE }}-${{ env.FILE_DATE }}
+        name: OpenWrt-firmware-${{ env.PROFILE }}-${{ env.FILE_DATE }}
         path: /tmp/bin_firmware
 
     - name: Create Release and Upload Firmware
