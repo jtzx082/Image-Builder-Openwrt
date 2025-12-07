@@ -322,6 +322,12 @@ jobs:
           
           if [ $STATUS -eq 0 ]; then
             echo -e "${GREEN}SUCCESS!${NC}"
+            
+            echo "-> Reloading system services..."
+            # 修复 Nikki 等插件安装后菜单为空的问题 (刷新 RPCD ACL)
+            if [ -f /etc/init.d/rpcd ]; then /etc/init.d/rpcd restart; fi
+            if [ -f /etc/init.d/uhttpd ]; then /etc/init.d/uhttpd restart; fi
+            
             rm -rf /tmp/luci-modulecache/
             rm -f /tmp/luci-indexcache
             echo "Cache cleared. Please refresh LuCI."
