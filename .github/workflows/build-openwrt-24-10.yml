@@ -63,6 +63,7 @@ jobs:
         iptables-nft ipset iptables-mod-tproxy iptables-mod-socket \
         bind-dig luci-compat luci-lib-ipkg \
         sing-box ucode-mod-digest \
+        luci \
         -libustream-mbedtls"
         
         make image PROFILE="${{ env.TARGET_PROFILE }}" PACKAGES="$PACKAGES"
