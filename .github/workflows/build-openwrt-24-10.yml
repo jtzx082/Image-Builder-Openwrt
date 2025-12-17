@@ -45,6 +45,34 @@ jobs:
         echo "CONFIG_TARGET_KERNEL_PARTSIZE=${{ env.KERNEL_PARTSIZE }}" >> .config
         echo "CONFIG_TARGET_ROOTFS_PARTSIZE=${{ env.ROOTFS_PARTSIZE }}" >> .config
 
+    # --- 新增步骤：注入自定义脚本 (IP/端口/密码) ---
+    - name: 3.5. Create Custom Network Script
+      working-directory: openwrt-builder
+      run: |
+        mkdir -p files/etc/uci-defaults
+        
+        cat > files/etc/uci-defaults/99-custom-network << 'EOF'
+        #!/bin/sh
+        
+        # 1. 修改 LAN 口 IP 为 10.0.0.1
+        uci set network.lan.ipaddr='10.0.0.1'
+        
+        # 2. 将 eth2 和 eth3 添加到网桥 (br-lan)
+        uci add_list network.@device[0].ports='eth2'
+        uci add_list network.@device[0].ports='eth3'
+        
+        # 3. 提交网络修改
+        uci commit network
+        
+        # 4. 设置 Root 密码为 'password'
+        echo -e "password\npassword" | passwd root
+        
+        exit 0
+        EOF
+        
+        # 赋予脚本执行权限
+        chmod +x files/etc/uci-defaults/99-custom-network
+
     - name: 4. Build Firmware
       working-directory: openwrt-builder
       run: |
@@ -66,7 +94,8 @@ jobs:
         luci \
         -libustream-mbedtls"
         
-        make image PROFILE="${{ env.TARGET_PROFILE }}" PACKAGES="$PACKAGES"
+        # ⚠️ 修改：增加了 FILES="files" 参数，使自定义脚本生效
+        make image PROFILE="${{ env.TARGET_PROFILE }}" PACKAGES="$PACKAGES" FILES="files"
 
     - name: 5. Organize Files
       id: organize
@@ -92,6 +121,7 @@ jobs:
         echo "📅 Build Date: $(date)" >> release.txt
         echo "🐧 Architecture: x86_64" >> release.txt
         echo "📂 Partitions: Kernel=${{ env.KERNEL_PARTSIZE }}M, RootFS=${{ env.ROOTFS_PARTSIZE }}M" >> release.txt
+        echo "🔧 Customization: IP=10.0.0.1, Ports=eth0-3, RootPwd=password" >> release.txt
 
     - name: 7. Upload to Releases
       uses: softprops/action-gh-release@v1
