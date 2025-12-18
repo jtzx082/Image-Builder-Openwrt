@@ -115,10 +115,14 @@ jobs:
       id: tag
       if: steps.organize.outputs.STATUS == 'success'
       run: |
-        echo "release_tag=v$(date +"%Y%m%d-%H%M")" >> $GITHUB_OUTPUT
+        # ⚠️ 修改：添加 TZ='Asia/Shanghai' 以获取北京时间
+        # 生成 Tag 版本号 (例如: v20251217-2315)
+        echo "release_tag=v$(TZ='Asia/Shanghai' date +"%Y%m%d-%H%M")" >> $GITHUB_OUTPUT
+        
+        # 生成发布说明
         touch release.txt
         echo "☁️ OpenWrt Version: ${{ env.OPENWRT_VERSION }}" >> release.txt
-        echo "📅 Build Date: $(date)" >> release.txt
+        echo "📅 Build Date: $(TZ='Asia/Shanghai' date "+%Y-%m-%d %H:%M:%S (北京时间)")" >> release.txt
         echo "🐧 Architecture: x86_64" >> release.txt
         echo "📂 Partitions: Kernel=${{ env.KERNEL_PARTSIZE }}M, RootFS=${{ env.ROOTFS_PARTSIZE }}M" >> release.txt
         echo "🔧 Customization: IP=10.0.0.1, Ports=eth0-3, RootPwd=password" >> release.txt
