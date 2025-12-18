@@ -352,7 +352,8 @@ jobs:
       - name: 🕒 Generate Time-Stamped Tag
         id: tag_gen
         run: |
-          DATE_STR=$(date +'%Y.%m.%d-%H%M')
+          # ⚠️ 修复：添加 TZ='Asia/Shanghai' 以获取北京时间
+          DATE_STR=$(TZ='Asia/Shanghai' date +'%Y.%m.%d-%H%M')
           echo "date=$DATE_STR" >> $GITHUB_OUTPUT
 
       - name: 🚀 Create Release (ncipollo)
