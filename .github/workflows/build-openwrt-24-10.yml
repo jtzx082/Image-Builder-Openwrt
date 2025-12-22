@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 env:
-  OPENWRT_VERSION: 24.10.4
+  OPENWRT_VERSION: 24.10.5
   ARCH_PATH: x86/64
   TARGET_PROFILE: generic
   KERNEL_PARTSIZE: 128
