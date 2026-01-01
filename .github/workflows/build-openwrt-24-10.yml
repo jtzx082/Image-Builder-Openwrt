@@ -55,7 +55,7 @@ jobs:
         #!/bin/sh
         
         # 1. 修改 LAN 口 IP 为 10.0.0.1
-        uci set network.lan.ipaddr='10.0.0.1'
+        uci set network.lan.ipaddr='192.168.5.1'
         
         # 2. 将 eth2 和 eth3 添加到网桥 (br-lan)
         uci add_list network.@device[0].ports='eth2'
